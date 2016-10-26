@@ -17,11 +17,11 @@ Minor version acceptable: npm install express@"^4.0.0"
 ## Node and HTTP
 
 HTTP core module:  <br>
-`var http = require('http');`
-File system core module ():
-`var fs = require('fs');`
-Path core module: Make OS's independent paths
-`var path = require('path');`
+`var http = require('http');`<br>
+File system core module ():<br>
+`var fs = require('fs');`<br>
+Path core module: Make OS's independent paths<br>
+`var path = require('path');`<br>
 
 
 ## Express module
