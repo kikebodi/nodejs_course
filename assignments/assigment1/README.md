@@ -4,9 +4,9 @@
 
 In this assignment you will continue the exploration of Node modules, Express and the REST API. At the end of this assignment, you should have completed the following tasks to update the server:
 
-1 - Created a Node module using Express router to support the routes for the dishes REST API.
-2 - Created a Node module using Express router to support the routes for the promotions REST API.
-3 - Created a Node module using Express router to support the routes for the leadership REST API.
+1. Created a Node module using Express router to support the routes for the dishes REST API.
+2. Created a Node module using Express router to support the routes for the promotions REST API.
+3. Created a Node module using Express router to support the routes for the leadership REST API.
 
 
 ##Assignment Requirements
@@ -25,20 +25,22 @@ This assignment requires you to complete the following three tasks. Detailed ins
 
 In this task you will create a separate Node module implementing an Express router to support the REST API for the dishes. You can reuse all the code that you implemented in the previous exercise. To do this, you need to complete the following:
 
-Create a Node module named dishRouter.js that implements the Express router for the /dishes REST API end point.
-Require the Node module you create above within your Express application and mount it on the /dishes route.
+1. Create a Node module named dishRouter.js that implements the Express router for the /dishes REST API end point.
+2. Require the Node module you create above within your Express application and mount it on the /dishes route.
+
 ###Task 2
 
 In this task you will create a separate Node module implementing an Express router to support the REST API for the promotions. To do this, you need to complete the following:
 
-Create a Node module named promoRouter.js that implements the Express router for the /promotions REST API end point.
-Require the Node module you create above within your Express application and mount it on the /promotions route.
+1.Create a Node module named promoRouter.js that implements the Express router for the /promotions REST API end point.
+2.Require the Node module you create above within your Express application and mount it on the /promotions route.
+
 ###Task 3
 
 In this task you will create a separate Node module implementing an Express router to support the REST API for the leadership. To do this, you need to complete the following:
 
-Create a Node module named leaderRouter.js that implements the Express router for the /leadership REST API end point.
-Require the Node module you create above within your Express application and mount it on the /leadership route.
+1. Create a Node module named leaderRouter.js that implements the Express router for the /leadership REST API end point.
+2. Require the Node module you create above within your Express application and mount it on the /leadership route.
 
 ##Review criteria
 
