@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 //If the body comes in JSON format, body parser converts to JavaScript objects in order to be accesed from the code. 
 app.use(bodyParser.json());
 
+
 //Specify what to do when '/dishes' is requested
 app.all('/dishes', function(req,res,next){
 
@@ -54,6 +55,7 @@ app.put('/dishes/:dishId', function(req, res, next){
 app.delete('/dishes/:dishId', function(req, res, next){
         res.end('Deleting dish: ' + req.params.dishId);
 });
+
 
 //Define public as static folder where all the files will be sent as is.
 app.use(express.static(__dirname + '/public'));
