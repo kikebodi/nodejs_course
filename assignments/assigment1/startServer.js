@@ -4,6 +4,8 @@ var morgan = require('morgan');
 
 //import the End point implementation for 'dishes'
 var dishRouter = require('./dishRouter');
+//import the End point implementation for 'promotions'
+var promoRouter = require('./promoRouter');
 
 //import body parser
 //var bodyParser = require('body-parser');
@@ -22,7 +24,7 @@ app.use(morgan('dev'));
 **	ASSIGN END POINTS HERE
 **/
 
-//attach router into my express app
+//attach router into my express app for /dishes' end point
 dishRouter(function(err,router) {
 	if (err) {
 		console.log('Could not start the "/dishes" end point');
@@ -30,6 +32,17 @@ dishRouter(function(err,router) {
 	}
 	else {
          app.use('/dishes', router);
+	}
+    });
+
+//attach router into my express app for /promotions' end point
+promoRouter(function(err,router) {
+	if (err) {
+		console.log('Could not start the "/promotions" end point');
+	    console.log(err);
+	}
+	else {
+         app.use('/promotions', router);
 	}
     });
 
