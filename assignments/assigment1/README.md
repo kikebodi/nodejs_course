@@ -32,8 +32,8 @@ In this task you will create a separate Node module implementing an Express rout
 
 In this task you will create a separate Node module implementing an Express router to support the REST API for the promotions. To do this, you need to complete the following:
 
-1.Create a Node module named promoRouter.js that implements the Express router for the /promotions REST API end point.
-2.Require the Node module you create above within your Express application and mount it on the /promotions route.
+1. Create a Node module named promoRouter.js that implements the Express router for the /promotions REST API end point.
+2. Require the Node module you create above within your Express application and mount it on the /promotions route.
 
 ###Task 3
 
