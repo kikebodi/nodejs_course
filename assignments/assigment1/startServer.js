@@ -6,9 +6,8 @@ var morgan = require('morgan');
 var dishRouter = require('./dishRouter');
 //import the End point implementation for 'promotions'
 var promoRouter = require('./promoRouter');
-
-//import body parser
-//var bodyParser = require('body-parser');
+//import the End point implementation for 'leadership'
+var leaderRouter = require('./leaderRouter');
 
 //Define local variables
 var hostname = 'localhost';
@@ -19,6 +18,7 @@ var app = express();
 
 //Enable morgan to get dev logging
 app.use(morgan('dev'));
+
 
 /**
 **	ASSIGN END POINTS HERE
@@ -43,6 +43,17 @@ promoRouter(function(err,router) {
 	}
 	else {
          app.use('/promotions', router);
+	}
+    });
+
+//attach router into my express app for /leadership' end point
+leaderRouter(function(err,router) {
+	if (err) {
+		console.log('Could not start the "/leadership" end point');
+	    console.log(err);
+	}
+	else {
+         app.use('/leadership', router);
 	}
     });
 
