@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 var Currency = mongoose.Types.Currency;
 
-//Create the 
+//Create the comment Schema (sub-document)
 var commentSchema = new Schema({
 	rating: {
 		type: Number,
