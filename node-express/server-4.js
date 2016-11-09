@@ -1,4 +1,4 @@
-//import express and html modules.
+//import express and morgan modules.
 var express = require('express');
 var morgan = require('morgan');
 //import body parser
@@ -15,7 +15,7 @@ var app = express();
 app.use(morgan('dev'));
 
 //Create Router object supported by Express.
-//
+//Router is a middleware.
 var dishRouter = express.Router();
 dishRouter.use(bodyParser.json());
 
