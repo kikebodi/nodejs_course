@@ -1,18 +1,24 @@
+/**
+**	Main method of this REST API
+**  author: Kike Bodi (www.kikebodi.com)
+**/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//import monggose model
 var mongoose = require('mongoose');
 
-var url = 'mongodb://localhost:27017/conFusion';
-mongoose.connect(url);
+var URL = 'mongodb://localhost:27017/conFusion';
+mongoose.connect(URL);
+//The variable db is where we will make the queries
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    // we're connected!
-    console.log("Connected correctly to server");
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', function(){
+	console.log('Connected to the server');
 });
 
 var index = require('./routes/index');
@@ -41,37 +47,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 //attach router into my express app for /dishes' end point
-dishRouter(function(err,router) {
-	if (err) {
-		console.log('Could not start the "/dishes" end point');
-	    console.log(err);
-	}
-	else {
-         app.use('/dishes', router);
-	}
-    });
-
+app.use('/dishes', dishRouter);
 //attach router into my express app for /promotions' end point
-promoRouter(function(err,router) {
-	if (err) {
-		console.log('Could not start the "/promotions" end point');
-	    console.log(err);
-	}
-	else {
-         app.use('/promotions', router);
-	}
-    });
-
+app.use('/promotions', promoRouter);
 //attach router into my express app for /leadership' end point
-leaderRouter(function(err,router) {
-	if (err) {
-		console.log('Could not start the "/leadership" end point');
-	    console.log(err);
-	}
-	else {
-         app.use('/leadership', router);
-	}
-    });
+app.use('/leadership', leaderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
