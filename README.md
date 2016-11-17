@@ -83,9 +83,24 @@ To test for conditions:
 npm install mongoose --save
 
 ##REST API with Express, MongoDB and Mongoose
+rest-server folder
 
+##Basic Authentication
+Authorization is a String (username:password) encoded with Base64.
+"Authorization: Basic QWdhagsghghdsfghdfg=="
+basic-auth folder
 
+##Cookies and Express Sessions
+As HTTP does not provide any method for User tracking, we should do it with Cookies or express-sesions.
 
+Cookies:
+npm install cookie-parser
+basic-auth-cookies folder
+
+Express sessions:
+sudo npm install express-session session-file-store --save
+basic-auth-session folder
+The session cookies are in basic-auth-session/sessions
 
 
 
