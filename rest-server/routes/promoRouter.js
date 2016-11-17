@@ -43,7 +43,7 @@ var promotions = require('../models/promotions');
   promoRouter.route('/:promoId')
   .get(function(req,res,next){ 
       //res.end('Will send details of the promo: ' + req.params.promoId +' to you!');
-     promotions.findById(req.params.id ,function(err,promo){
+     promotions.findById(req.params.promoId ,function(err,promo){
      if(err) throw err;
      //This will return the promo in a JSON format
      res.json(promo);

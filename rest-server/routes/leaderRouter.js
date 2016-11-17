@@ -43,7 +43,7 @@ var leaders = require('../models/leadership');
   leaderRouter.route('/:leaderId')
   .get(function(req,res,next){ 
       //res.end('Will send details of the leader: ' + req.params.leaderId +' to you!');
-     leaders.findById(req.params.id ,function(err,leader){
+     leaders.findById(req.params.leaderId ,function(err,leader){
      if(err) throw err;
      //This will return the leader in a JSON format
      res.json(leader);

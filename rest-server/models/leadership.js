@@ -13,20 +13,17 @@ var leaderSchema = new Schema({
 		required: true,
 		unique: true
 	},
-	image: {
-		type: String,
-		required: true,
-		unique: true
-	},
 	designation: {
 		type: String,
 		required: true,
-		unique: false
 	},
 	abbr: {
 		type: String,
 		required: true,
-		unique: false
+	},
+	image: {
+		type: String,
+		required: true,
 	},
 	description: {
 		type: String,

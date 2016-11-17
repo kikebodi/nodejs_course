@@ -117,8 +117,6 @@ dishRouter.route('/:dishId/comments/:commentId')
     // comment as a new comment
     Dishes.findById(req.params.dishId, function (err, dish) {
         if (err) throw err;
-        console.log(req.params.commentId);
-        console.log(dish.comments.id);
         dish.comments.id(req.params.commentId).remove();
         dish.comments.push(req.body);
         dish.save(function (err, dish) {
