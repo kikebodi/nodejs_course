@@ -118,7 +118,9 @@ npm install passport --save
 For local strategy
 npm install passport-local --save
 Plugin to simplify building user/pass login with MongoDB and mongoose
-npm install passport-local-mongoose --save
+npm install passport-local-mongoose --
+
+
 
 
 
