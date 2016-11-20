@@ -103,6 +103,24 @@ basic-auth-session folder
 The session cookies are in basic-auth-session/sessions
 
 
+##User Authentication with Passport
+npm install jsonwebtoken -save // to use JWT
+
+###Passport module
+Authentication middleware for Node.js
+
+Supports:
+ - Local strategy
+ - OpenID
+ - Oauth
+
+npm install passport --save
+For local strategy
+npm install passport-local --save
+Plugin to simplify building user/pass login with MongoDB and mongoose
+npm install passport-local-mongoose --save
+
+
 
 
 
