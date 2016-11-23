@@ -16,7 +16,7 @@ var Verify = require('./verify');
 
   dishRouter.route('/')
     //note that we don't use ';' until '.delete' everything is attache to 'dishRouter.route('/')'
-  .get(Verify.verifyAdmin, function(req,res,next){
+  .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
     //res.end('We will send all the dishes to you');
     Dishes.find({},function(err,dish){ // {} -> empty query (will return all the objects)
      if(err) throw err;
