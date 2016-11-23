@@ -6,6 +6,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 //import leaders mongoose schema
 var leaders = require('../models/leadership');
+//make use of verification
+var Verify = require('./verify');
   
   //Create Router object supported by Express.
   //Router is a middleware.
@@ -14,7 +16,7 @@ var leaders = require('../models/leadership');
 
   leaderRouter.route('/')
     //note that we don't use ';' until '.delete' everything is attache to 'leaderRouter.route('/')'
-  .get(function(req,res,next){
+  .get(Verify.verifyOrdinaryUser, function(req,res,next){
     //res.end('We will send all the leaders to you');
     leaders.find({},function(err,leader){ // {} -> empty query (will return all the objects)
      if(err) throw err;
@@ -22,7 +24,7 @@ var leaders = require('../models/leadership');
      res.json(leader);
     });
   })
-  .post(function(req,res,next){
+  .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
     //res.end('We will add the leader: '+req.body.name+' with details: '+ req.body.description);
     leaders.create(req.body, function(err, leader){
       if(err) throw err;
@@ -32,7 +34,7 @@ var leaders = require('../models/leadership');
       res.end('Added leader with id: '+id);
     });
   })
-  .delete(function(req,res,next){
+  .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
     leaders.remove({}, function(err, resp){
       if(err) throw err;
       res.json(resp); //the objects deleted in JSON format
@@ -41,7 +43,7 @@ var leaders = require('../models/leadership');
 
 
   leaderRouter.route('/:leaderId')
-  .get(function(req,res,next){ 
+  .get(Verify.verifyOrdinaryUser, function(req,res,next){ 
       //res.end('Will send details of the leader: ' + req.params.leaderId +' to you!');
      leaders.findById(req.params.leaderId ,function(err,leader){
      if(err) throw err;
@@ -51,7 +53,7 @@ var leaders = require('../models/leadership');
       
 
   })
-  .put(function(req, res, next){
+  .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     //res.write('Updating the leader: ' + req.params.leaderId + '\n');
     //res.end('Will update the leader: ' + req.body.name + ' with details: ' + req.body.description);
     leaders.findByIdAndUpdate(req.params.leaderId,{$set: req.body},{new : true}, function(err,resp){
@@ -59,7 +61,7 @@ var leaders = require('../models/leadership');
       res.json(resp);
     });
   })
-  .delete(function(req, res, next){
+  .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     //res.end('Deleting leader: ' + req.params.leaderId);
     leaders.findByIdAndRemove(req.params.leaderId, function (err, resp) {        
       if (err) throw err;

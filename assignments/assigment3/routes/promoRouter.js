@@ -6,6 +6,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 //import promotions mongoose schema
 var promotions = require('../models/promotions');
+//make use of verification
+var Verify = require('./verify');
   
   //Create Router object supported by Express.
   //Router is a middleware.
@@ -14,7 +16,7 @@ var promotions = require('../models/promotions');
 
   promoRouter.route('/')
     //note that we don't use ';' until '.delete' everything is attache to 'promoRouter.route('/')'
-  .get(function(req,res,next){
+  .get(Verify.verifyOrdinaryUser, function(req,res,next){
     //res.end('We will send all the promotions to you');
     promotions.find({},function(err,promo){ // {} -> empty query (will return all the objects)
      if(err) throw err;
@@ -22,7 +24,7 @@ var promotions = require('../models/promotions');
      res.json(promo);
     });
   })
-  .post(function(req,res,next){
+  .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
     //res.end('We will add the promo: '+req.body.name+' with details: '+ req.body.description);
     promotions.create(req.body, function(err, promo){
       if(err) throw err;
@@ -32,7 +34,7 @@ var promotions = require('../models/promotions');
       res.end('Added promo with id: '+id);
     });
   })
-  .delete(function(req,res,next){
+  .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req,res,next){
     promotions.remove({}, function(err, resp){
       if(err) throw err;
       res.json(resp); //the objects deleted in JSON format
@@ -41,7 +43,7 @@ var promotions = require('../models/promotions');
 
 
   promoRouter.route('/:promoId')
-  .get(function(req,res,next){ 
+  .get(Verify.verifyOrdinaryUser, function(req,res,next){ 
       //res.end('Will send details of the promo: ' + req.params.promoId +' to you!');
      promotions.findById(req.params.promoId ,function(err,promo){
      if(err) throw err;
@@ -51,7 +53,7 @@ var promotions = require('../models/promotions');
       
 
   })
-  .put(function(req, res, next){
+  .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     //res.write('Updating the promo: ' + req.params.promoId + '\n');
     //res.end('Will update the promo: ' + req.body.name + ' with details: ' + req.body.description);
     promotions.findByIdAndUpdate(req.params.promoId,{$set: req.body},{new : true}, function(err,resp){
@@ -59,7 +61,7 @@ var promotions = require('../models/promotions');
       res.json(resp);
     });
   })
-  .delete(function(req, res, next){
+  .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     //res.end('Deleting promo: ' + req.params.promoId);
     promotions.findByIdAndRemove(req.params.promoId, function (err, resp) {        
       if (err) throw err;

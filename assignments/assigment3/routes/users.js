@@ -2,11 +2,16 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
-var Verify    = require('./verify');
+var Verify = require('./verify');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
+  //res.end('We will send all the dishes to you');
+    User.find({},function(err,user){ // {} -> empty query (will return all the objects)
+     if(err){ throw err;}
+     //This will return the dishes in a JSON format
+     res.json(user);
+    });
 });
 
 router.post('/register', function(req, res) {
@@ -24,7 +29,7 @@ router.post('/register', function(req, res) {
     });
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', Verify.verifyOrdinaryUser, function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
 
     if (err) {
@@ -52,7 +57,7 @@ router.post('/login', function(req, res, next) {
   })(req,res,next);
 });
 
-router.get('/logout', function(req, res) {
+router.get('/logout', Verify.verifyOrdinaryUser, function(req, res) {
     req.logout();
   res.status(200).json({
     status: 'Bye!'

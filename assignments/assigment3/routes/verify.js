@@ -36,12 +36,13 @@ exports.verifyOrdinaryUser = function (req, res, next) {
 };
 
 //Task 1. Assigment 3
-//We execute this middleware just after 'verifyOrdinaryUser' to check in the authenticated user is Admin
+//We execute this middleware just after 'verifyOrdinaryUser' to check if the authenticated user is also Admin
 exports.verifyAdmin = function(req, res, next){
      if(req.decoded._doc.admin === true){
         next();
         }else{
-           var err = new Error('You are not an Admin user');
+           var err = new Error('You are not authorized to perform this operation!');
+           err.status = 403;
            next(err);
            }
-};
+}; 
