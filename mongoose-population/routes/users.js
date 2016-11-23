@@ -2,24 +2,34 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
-var Verify    = require('./verify');
+var Verify = require('./verify');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
+  //res.end('We will send all the dishes to you');
+    User.find({},function(err,user){ // {} -> empty query (will return all the objects)
+     if(err){ throw err;}
+     //This will return the dishes in a JSON format
+     res.json(user);
+    });
 });
 
 router.post('/register', function(req, res) {
     User.register(new User({ username : req.body.username }),
-      req.body.password, 
-      function(err, user) {
-        console.log(req.body.username);
-        console.log(req.body.password);
+        req.body.password, function(err, user) {
         if (err) {
             return res.status(500).json({err: err});
         }
-        passport.authenticate('local')(req, res, function () {
-            return res.status(200).json({status: 'Registration Successful!'});
+        if(req.body.firstname) {
+            user.firstname = req.body.firstname;
+        }
+        if(req.body.lastname) {
+            user.lastname = req.body.lastname;
+        }
+        user.save(function(err,user) {
+            passport.authenticate('local')(req, res, function () {
+                return res.status(200).json({status: 'Registration Successful!'});
+            });
         });
     });
 });
@@ -52,7 +62,7 @@ router.post('/login', function(req, res, next) {
   })(req,res,next);
 });
 
-router.get('/logout', function(req, res) {
+router.get('/logout', Verify.verifyOrdinaryUser, function(req, res) {
     req.logout();
   res.status(200).json({
     status: 'Bye!'

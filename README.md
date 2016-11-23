@@ -120,6 +120,12 @@ npm install passport-local --save
 Plugin to simplify building user/pass login with MongoDB and mongoose
 npm install passport-local-mongoose --
 
+##Mongoose Population
+NoSQL databases do not explicitly support relations lies the SLQ databases. (ie: join()).
+
+Population is the process of automatically replace specified paths within a document with documents from another collection.
+
+mongoose-population folder.
 
 
 
