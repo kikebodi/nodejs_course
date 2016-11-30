@@ -1,2 +1,7 @@
 #Modules folder
 node_modules/
+mongodb/
+.DS_Store
+.log
+#This file will contain sensible data so it won't be uploaded (in a public repo)
+config.js
