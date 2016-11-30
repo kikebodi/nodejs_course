@@ -17,6 +17,9 @@ var passport = require('passport');
 //import the config file
 var config = require('./config');
 
+//import OAuth autentication
+var authenticate = require('./authenticate');
+
 mongoose.connect(config.mongoUrl);
 //The variable db is where we will make the queries
 var db = mongoose.connection;
