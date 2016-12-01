@@ -134,5 +134,15 @@ https-rest-server-passport folder
 ##OAuth and Users Authentication
 OAuth-rest-server-passport folder
 
+##Backend as a Service (BaaS)
+Advantages:
+- Pre-built, tried and tested components
+- Reducion in server-side development effort
+- Recent technological developments integrated by the service provider and made accessible to developers.
 
+Disadvantages:
+- Black box
+- Vendor lock-in
+- Loss of flexibility
+- Additional training needed in vendor-specific APIs
 
