@@ -146,3 +146,95 @@ Disadvantages:
 - Loss of flexibility
 - Additional training needed in vendor-specific APIs
 
+Exercise:
+npm install strongloop -g
+
+slc loopback (and follow instructions)
+cd folder
+sudo npm install
+slc loopback:model (and define the atributes of a document)
+slc loopback:relation (to define relationships) 
+[ie. to join dishes with comments]
+```
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:relation
+? Select the model to create the relationship from: dishes
+? Relation type: has many
+? Choose a model to create a relationship with: Comments
+? Enter the property name for the relation: comments
+? Optionally enter a custom foreign key: 
+? Require a through model? No
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:relation
+? Select the model to create the relationship from: dishes
+? Relation type: has many
+? Choose a model to create a relationship with: Customer
+? Enter the property name for the relation: customers
+? Optionally enter a custom foreign key: 
+? Require a through model? No
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:relation
+? Select the model to create the relationship from: Comments
+? Relation type: belongs to
+? Choose a model to create a relationship with: dishes
+? Enter the property name for the relation: dishes
+? Optionally enter a custom foreign key: 
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:relation
+? Select the model to create the relationship from: Comments
+? Relation type: belongs to
+? Choose a model to create a relationship with: Customer
+? Enter the property name for the relation: customer
+? Optionally enter a custom foreign key: customerId
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:relation
+? Select the model to create the relationship from: Customer
+? Relation type: has many
+? Choose a model to create a relationship with: Comments
+? Enter the property name for the relation: comments
+? Optionally enter a custom foreign key: customerId
+? Require a through model? No
+```
+[example. Define access permissions for Comments collection]
+```
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:acl
+? Select the model to apply the ACL entry to: dishes
+? Select the ACL scope: All methods and properties
+? Select the access type: Write
+? Select the role other
+? Enter the role name: admin
+? Select the permission to apply Explicitly grant access
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:acl
+? Select the model to apply the ACL entry to: (all existing models)
+? Select the ACL scope: All methods and properties
+? Select the access type: All (match all types)
+? Select the role All users
+? Select the permission to apply Explicitly deny access
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:acl
+? Select the model to apply the ACL entry to: Comments
+? Select the ACL scope: All methods and properties
+? Select the access type: Read
+? Select the role Any authenticated user
+? Select the permission to apply Explicitly grant access
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:acl
+? Select the model to apply the ACL entry to: Comments
+? Select the ACL scope: A single method
+? Enter the method name create
+? Select the role Any authenticated user
+? Select the permission to apply Explicitly grant access
+Enriques-MacBook-Pro:loopback-server Kike$ slc loopback:acl
+? Select the model to apply the ACL entry to: Comments
+? Select the ACL scope: All methods and properties
+? Select the access type: Write
+? Select the role The user owning the object
+? Select the permission to apply Explicitly grant access
+Enriques-MacBook-Pro:loopback-server Kike$ 
+```
+//Start server
+slc start (or node .)
+
+##MongoDB commands
+show dbs
+use <db name>
+show collections
+db.collectionName.find() //show all the data in a collection
+db.collectionName.drop() //delete that collection
+{
+"username":"",
+"password":""
+}
